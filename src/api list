@@ -1,5 +1,8 @@
-'https://dummyjson.com/products'
-
+getCategory=
 'https://dummyjson.com/products/category-list'
 
+getProducts
+'https://dummyjson.com/products'
+
+catName
 'https://dummyjson.com/products/category/smartphones'

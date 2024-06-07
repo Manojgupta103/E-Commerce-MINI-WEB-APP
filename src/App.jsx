@@ -6,15 +6,17 @@ import { useState, useEffect } from "react";
 function App() {
     let[finalCategory,setFinalCategory]=useState([])
     let[finalProduct, setFinalProduct]=useState([])
+    let[catName, setCatName]=useState('')
+
     let getCategory=()=>{
-        axios.get('https://dummyjson.com/products/category-list')
+        axios.get(`https://dummyjson.com/products/category-list`)
         .then((res) =>res.data)
         .then((finalRes) => {
             setFinalCategory(finalRes);
         })
     }
     let getProducts=()=>{
-        axios.get('https://dummyjson.com/products/category/smartphones')
+        axios.get(`https://dummyjson.com/products`)
         .then((proRes) =>proRes.data)
         .then((finalRes) => {
             setFinalProduct(finalRes.products);
@@ -25,12 +27,22 @@ function App() {
         getProducts();
     },[])
 
+    useEffect(()=>{
+        if(catName!==""){
+            axios.get(`https://dummyjson.com/products/category/${catName}`)
+            .then((proRes) =>proRes.data)
+            .then((finalRes) => {
+                setFinalProduct(finalRes.products);
+            })
+        }
+    },[catName])
+
     let Pitems=finalProduct.map((products, index)=>{
         return(
         <ProductItems key={index} pdata={products} />
         ) 
     })
-
+    
   return (
     <>
       <div className="py-[40px]">
@@ -42,7 +54,7 @@ function App() {
           <div className="grid grid-cols-[30%_auto] gap-[20px]">
             <div>
 
-              <Category  finalCategory={finalCategory} />
+              <Category  finalCategory={finalCategory} setCatName={setCatName} />
             </div>
             <div>
               <div className="grid grid-cols-3 gap-5">

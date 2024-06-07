@@ -1,9 +1,9 @@
 // import React from 'react'
 
-export default function Category({finalCategory}) {
+export default function Category({finalCategory, setCatName}) {
     let cat=finalCategory.map((v,i) => {
         return(
-            <li key={i} className='bg-[#ccc] p-[7px] cursor-pointer text-[20px] font-serif font-[500 mb-2'>{v}</li>
+            <li onClick={()=>setCatName(v)} key={i} className='bg-[#ccc] p-[7px] cursor-pointer text-[20px] font-serif font-[500 mb-2'>{v}</li>
         )
     })
   return (
