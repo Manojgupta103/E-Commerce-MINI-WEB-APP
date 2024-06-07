@@ -18,7 +18,6 @@ function App() {
         .then((finalRes) => {
             console.log(finalRes);
         })
-    
     }
     useEffect(()=>{
         getCategory();
